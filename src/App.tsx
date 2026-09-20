@@ -47,6 +47,7 @@ import { ErrorBoundary } from './components/ErrorBoundary'
 
 import { IntroAnimation } from './components/IntroAnimation'
 import { cargarPerfil, tieneLicenciaValida, getPerfil } from './services/authService'
+import { LandingPage } from './components/LandingPagePublica'
 
 function BackgroundImage() {
   const [fondoLandscape, setFondoLandscape] = useState('/images/backgrounds/background_landscape.jpg')
@@ -644,6 +645,9 @@ export default function App() {
                   <Route path="/dev" element={<DeveloperAuthPage />} />
                   <Route path="/desarrollador" element={<DeveloperAuthPage />} />
 
+                  {/* Landing Page Pública — siempre accesible en /landing */}
+                  <Route path="/landing" element={<LandingPage onEnterApp={() => window.location.href = '/registro-taller'} />} />
+
                   {/* Gemelo Digital */}
                   <Route path="/gemelo-digital" element={<GemeloDigitalPage />} />
                   <Route path="/digital-twin" element={<GemeloDigitalPage />} />
@@ -666,7 +670,7 @@ export default function App() {
 
                   {/* Layout principal o Registro si es nuevo usuario */}
                   {necesitaRegistro ? (
-                    <Route path="*" element={<RegistroUsuarioTallerPage />} />
+                    <Route path="*" element={<LandingPage onEnterApp={() => window.location.href = '/registro-taller'} />} />
                   ) : !licenciaValida ? (
                     <Route path="*" element={
                       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', padding: '20px', textAlign: 'center', color: '#fff' }}>
